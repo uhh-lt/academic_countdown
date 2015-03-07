@@ -34,15 +34,13 @@ var timeLeftDescription = function(x) {
 // load DATABASE
 // Note: data is a list of json objects of this form containing, "venue", "area", "deadline" as parsable string for data (see http://www.w3schools.com/js/js_dates.asp) and optionally "approx" that indicates if the date is just based on a previous date
 var deadlines = new Array();
-// probably not the best idea to make it synchronous, but the quick and dirty hack works, for now
+// probably not the best idea to make it synchronous, but the quick and dirty hack works for now
 $.ajaxSetup({'async': false});
 $.getJSON(datasource, function(data) {
   for (var i in data) {
     data[i].deadline = new Date(data[i].deadline);
     deadlines.push(data[i])
   }
-  console.log(data);
-  console.log(deadlines);
 });
 
 // Friday, March 1st, 11:59pm UTC
