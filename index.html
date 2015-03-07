@@ -71,7 +71,7 @@ function refreshDisplay() {
     
     if(backi !== -1) {
       var dl= deadlines[backi];
-      var timeLeft= new Date(dl.deadline.getTime() - d.getTime());
+      var timeLeft= new Date(dl.deadline.getTime() - dc.getTime());
       $("#backfacetext").html(
         dl.venue + "</br>"
         + timeLeftDescription(timeLeft)
