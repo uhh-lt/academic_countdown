@@ -65,7 +65,7 @@ function refreshDisplay() {
         "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
       + "<div class=\"vd\">" + dl.venue + "</div>"
       + "<div class=\"ad\">" + dl.area + "</div>"
-      + "<div class=\"td\"> Deadline: " + dl.deadline.toString() + "</div>"
+      + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
       );
     }
