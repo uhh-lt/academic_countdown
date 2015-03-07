@@ -1,0 +1,287 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Academic Deadlines Countdown Timer</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+var datasource = "data.json"
+var backi= -1;
+
+// HELPER FUNCTIONS
+// x is date object
+var timeDescription = function(x) {  
+  return x.toLocaleString();
+}
+
+var timeLeftDescription = function(x) {
+   
+  var t = x.getTime();
+  if(t<0) t=0;
+  
+  var tseconds = t / 1000;
+  var seconds = Math.floor(tseconds) % 60;
+  var tminutes = tseconds / 60;
+  var minutes = Math.floor(tminutes) % 60;
+  var thours = tminutes / 60;
+  var hours = Math.floor(thours) % 24;
+  var tdays = thours / 24;
+  var days = Math.floor(tdays);
+  
+  return days + " days, " + hours + "h " + minutes + "m " + seconds + "s";
+}
+
+// load DATABASE
+// Note: data is a list of json objects of this form containing, "venue", "area", "deadline" as parsable string for data (see http://www.w3schools.com/js/js_dates.asp) and optionally "approx" that indicates if the date is just based on a previous date
+var deadlines = new Array();
+// probably not the best idea to make it synchronous, but the quick and dirty hack works, for now
+$.ajaxSetup({'async': false});
+$.getJSON(datasource, function(data) {
+  for (var i in data) {
+    data[i].deadline = new Date(data[i].deadline);
+    deadlines.push(data[i])
+  }
+  console.log(data);
+  console.log(deadlines);
+});
+
+// Friday, March 1st, 11:59pm UTC
+//deadlines.push({venue: "UAI", area: "Machine Learning", deadline: new Date("Friday, March 1st, 11:59pm UTC"), approx: 1});
+// Mar. 15, 2013
+//deadlines.push({venue: "IROS", area: "Robotics", deadline: new Date(2014, 2, 15, 23, 59, 0, 0)});
+
+// Display function, called every second or so
+function refreshDisplay() {
+    
+    var dc= new Date();
+    $("#currtime").text("Current time: " + timeDescription(dc));
+    
+    // convert from Local time to PST time
+    var utc = dc.getTime() + (dc.getTimezoneOffset() * 60000);
+    var utc_pst_offset = -8;
+    var d = new Date(utc + (3600000*utc_pst_offset));
+    
+    // calculate and display deadlines
+    for(var i=0;i<deadlines.length;i++) {
+      var dl= deadlines[i];
+      var timeLeft= new Date(dl.deadline.getTime() - d.getTime());
+      
+      // convert the deadline (specified in PST) to Local timezone time for displaying on the countdown
+      // (since the timeline displayed to the user should be listed in their local time)
+      var dlLocal = new Date(dl.deadline.getTime() - (dc.getTimezoneOffset() * 60000) - (3600000*utc_pst_offset));
+      
+      warningString= "";
+      if("approx" in dl) { warningString= "based on previous year!"; }
+      
+      $("#deadline" + i).html(
+        "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
+      + "<div class=\"vd\">" + dl.venue + "</div>"
+      + "<div class=\"ad\">" + dl.area + "</div>"
+      + "<div class=\"td\"> Deadline: " + timeDescription(dlLocal) + "</div>"
+      + "<div class=\"wd\">" + warningString + "</div>"
+      );
+    }
+    
+    if(backi !== -1) {
+      var dl= deadlines[backi];
+      var timeLeft= new Date(dl.deadline.getTime() - d.getTime());
+      $("#backfacetext").html(
+        dl.venue + "</br>"
+        + timeLeftDescription(timeLeft)
+        );
+    }
+    
+}
+
+// int main(){}
+$(document).ready(function() {  
+
+  // create divs for all deadlines and insert into DOM
+  for(var i=0;i<deadlines.length;i++) {
+    var dl= deadlines[i];
+    $("<div class=dd id=deadline" + i + "></div>").appendTo("div#deadlinesdiv");
+    var divid= "#deadline" + i;
+    
+    $(divid).hide();
+    $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
+    
+    
+    $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
+      // self-executing function hackery :)
+      return function() {
+        backi= z;
+        $("#backface").fadeIn("slow"); // fade in white stuff
+      }
+    }(i));
+    
+    
+  }
+ 
+  // set up deadline timer to redraw
+  setInterval(
+    function(){ refreshDisplay(); },
+    1000
+  );
+  
+  $("#backface").click(function() {
+    backi = -1;
+    $("#backface").fadeOut("slow");
+  });
+
+  $("#makeown").click(function() {
+    backi = -1;
+    $("#instrown").fadeToggle();
+  });
+  
+  // draw!
+  refreshDisplay();
+
+});
+
+</script>
+
+<style type="text/css">
+
+/* Some resetting */
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  color: #222;
+}
+
+/* Main content div */
+#surround{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 600px;
+  background-color: white;
+}
+
+/* Div that contains all deadlines */
+#deadlinesdiv {
+}
+
+#currtime{
+  font-size: 14px;
+}
+#bottompart{
+  text-align: center;
+}
+
+/* Page title */
+h1{
+  display: inline;
+  margin-right: 10px;
+  font-size: 35px;
+}
+
+/* The cells that contain each deadline */
+.dd{
+  padding: 10px;
+  margin-bottom: 3px;  
+  background-color: #EEE;
+  border: 1px solid #DDD;
+  cursor: pointer;
+  position: relative;
+}
+.dd:hover{
+  background-color: #DDD;
+  border: 1px solid #AAA;
+}
+/* Time left description div */
+.tld {
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+/* Area description div */
+.ad {
+  font-family: monospace;
+}
+
+/* Time description div */
+.td {
+}
+
+/* Venue description div */
+.vd {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Warning div */
+.wd {
+  position: absolute;
+  bottom: 10px;
+  right: 8px;
+  color: #700;
+  font-size: 10px;
+}
+
+#backface {
+  position: absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background-color: white;
+  display: none;
+  z-index: 888;
+}
+#backfacetext {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  font-size: 28px;
+  color: #555;
+  font-weight: bold;
+  z-index: 889;
+}
+#makeown {
+  text-decoration: underline;
+  color: #008;
+  cursor: pointer;
+}
+
+#instrown {
+  display: none;
+  background-color: #EEE;
+  border-radius: 5px;
+  padding: 5px;
+}
+</style>
+
+</head>
+<body>
+
+<div id="backface"><div id="backfacetext"></div></div>
+
+<div id="surround">
+  <h1>Academic Countdown</h1>
+  <br /><br />
+  <div id="currtime"></div>
+  <br /><br />
+  <div id="deadlinesdiv"></div>
+  <br />
+  <div id="bottompart">
+ 
+  <div id="makeown">Additional Info</div><br />
+  <div id="instrown">
+   <p>Based on <a href="http://www.academiccountdown.com/">Academic Countdown</a>. Thanks to <a href="https://twitter.com/karpathy">@karpathy</a> for providing the basis framework.</p>
+   <p>Download the file or fork the project and simply change the 'datasource', or follow the instructions on <a href="http://www.academiccountdown.com/">www.academiccountdown.com</a></p>
+  </div>
+  <br />
+  <br />
+  </div>
+  
+</div>
+
+
+</body>
+</html>
