@@ -1,5 +1,10 @@
 [
 	{
+		"venue": "GSCL",
+		"area": "Computaional Linguistics",
+		"deadline": "May 15, 2015 23:59 UTC+2"
+	},
+	{
 		"venue": "EMNLP",
 		"area": "Computaional Linguistics",
 		"deadline": "May 15, 2015 23:59 UTC-11"
