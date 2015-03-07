@@ -9,11 +9,6 @@ var datasource = "data.json"
 var backi= -1;
 
 // HELPER FUNCTIONS
-// x is date object
-var timeDescription = function(x) {  
-  return x.toString();
-}
-
 var timeLeftDescription = function(x) {
    
   var t = x.getTime();
@@ -52,7 +47,7 @@ $.getJSON(datasource, function(data) {
 function refreshDisplay() {
     
     var dc= new Date();
-    $("#currtime").text("Current time: " + timeDescription(dc));
+    $("#currtime").text("Current time: " + dc);
     
     // convert from Local time to PST time
     var utc = dc.getTime() + (dc.getTimezoneOffset() * 60000);
@@ -71,7 +66,7 @@ function refreshDisplay() {
         "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
       + "<div class=\"vd\">" + dl.venue + "</div>"
       + "<div class=\"ad\">" + dl.area + "</div>"
-      + "<div class=\"td\"> Deadline: " + timeDescription(dl) + "</div>"
+      + "<div class=\"td\"> Deadline: " + dl.deadline + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
       );
     }
