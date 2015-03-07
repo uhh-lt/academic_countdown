@@ -11,7 +11,7 @@ var backi= -1;
 // HELPER FUNCTIONS
 // x is date object
 var timeDescription = function(x) {  
-  return x.toLocaleString();
+  return x.toString();
 }
 
 var timeLeftDescription = function(x) {
@@ -64,10 +64,6 @@ function refreshDisplay() {
       var dl= deadlines[i];
       var timeLeft= new Date(dl.deadline.getTime() - d.getTime());
       
-      // convert the deadline (specified in PST) to Local timezone time for displaying on the countdown
-      // (since the timeline displayed to the user should be listed in their local time)
-      var dlLocal = new Date(dl.deadline.getTime() - (dc.getTimezoneOffset() * 60000) - (3600000*utc_pst_offset));
-      
       warningString= "";
       if("approx" in dl) { warningString= "based on previous year!"; }
       
@@ -75,7 +71,7 @@ function refreshDisplay() {
         "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
       + "<div class=\"vd\">" + dl.venue + "</div>"
       + "<div class=\"ad\">" + dl.area + "</div>"
-      + "<div class=\"td\"> Deadline: " + timeDescription(dlLocal) + "</div>"
+      + "<div class=\"td\"> Deadline: " + timeDescription(dl) + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
       );
     }
