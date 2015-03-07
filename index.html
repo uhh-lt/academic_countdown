@@ -36,6 +36,10 @@ $.getJSON(datasource, function(data) {
     data[i].deadline = new Date(data[i].deadline);
     deadlines.push(data[i])
   }
+  deadlines.sort(function(a,b) { 
+    return a.deadline.getTime() - b.deadline.getTime();
+  });
+});
 });
 
 // Friday, March 1st, 11:59pm UTC
