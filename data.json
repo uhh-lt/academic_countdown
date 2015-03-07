@@ -1,13 +1,8 @@
 [
 	{
-		"venue": "test",
-		"area": "Computaional Linguistics",
-		"deadline": "March 7, 2015 23:59 UTC+01"
-	},
-	{
 		"venue": "GSCL",
 		"area": "Computaional Linguistics",
-		"deadline": "May 15, 2015 23:59 UTC+01"
+		"deadline": "May 15, 2015 23:59 GMT+01"
 	},
 	{
 		"venue": "EMNLP",
