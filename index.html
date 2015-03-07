@@ -48,16 +48,11 @@ function refreshDisplay() {
     
     var dc= new Date();
     $("#currtime").text("Current time: " + dc);
-    
-    // convert from Local time to PST time
-    var utc = dc.getTime() + (dc.getTimezoneOffset() * 60000);
-    var utc_pst_offset = -8;
-    var d = new Date(utc + (3600000*utc_pst_offset));
-    
+
     // calculate and display deadlines
     for(var i=0;i<deadlines.length;i++) {
-      var dl= deadlines[i];
-      var timeLeft= new Date(dl.deadline.getTime() - d.getTime());
+      var dl = deadlines[i];
+      var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
       
       warningString= "";
       if("approx" in dl) { warningString= "based on previous year!"; }
