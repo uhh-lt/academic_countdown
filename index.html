@@ -24,7 +24,10 @@ var timeLeftDescription = function(x) {
   var tdays = thours / 24;
   var days = Math.floor(tdays);
   
-  return days + " days, " + hours + "h " + minutes + "m " + seconds + "s";
+  return ((days < 10) ? "0" : "") + days + " days, " + 
+         ((hours < 10) ? "0" : "") + hours + "h " + 
+         ((minutes < 10) ? "0" : "") + minutes + "m " + 
+         ((seconds < 10) ? "0" : "") + seconds + "s";
 }
 
 // load DATABASE
