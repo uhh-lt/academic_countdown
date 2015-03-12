@@ -71,8 +71,16 @@ function refreshDisplay() {
       + "<div class=\"ad\">" + dl.area + "</div>"
       + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
-      //+ " <a class=\"close\">x</a>"
+      + "<div class=\"hd\" id=\"hide"+i+"\">hide</div>" 
       );
+      var hid = "#hide"+i;
+      var did = "#deadline"+i;
+      $(hid).click(function(x) {
+        return function() {
+          $(x).hide();
+          return false;
+        }
+      }(did));
     }
     
     if(backi !== -1) {
@@ -94,6 +102,7 @@ $(document).ready(function() {
     var dl= deadlines[i];
     $("<div class=dd id=deadline" + i + "></div>").appendTo("div#deadlinesdiv");
     var divid= "#deadline" + i;
+    var hidid= "#hide" + i;
     
     $(divid).hide();
     $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
@@ -102,12 +111,10 @@ $(document).ready(function() {
     $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
       // self-executing function hackery :)
       return function() {
-        backi= z;
+        backi = z;
         $("#backface").fadeIn("slow"); // fade in white stuff
       }
     }(i));
-    
-    
   }
  
   // set up deadline timer to redraw
@@ -132,13 +139,6 @@ $(document).ready(function() {
 });
 
 </script>
-
-<script type='text/javascript'>jQuery(document).ready(function($) {
-		$(".close").click(function() {
-			$(this).closest(".dd").toggle(500);			
-		});
-	}); 
-	</script>
 
 <style type="text/css">
 
@@ -192,6 +192,7 @@ h1{
   background-color: #DDD;
   border: 1px solid #AAA;
 }
+
 /* Time left description div */
 .tld {
   float: right;
@@ -221,6 +222,13 @@ h1{
   bottom: 10px;
   right: 8px;
   color: #700;
+  font-size: 10px;
+}
+.hd{
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: #808080;
   font-size: 10px;
 }
 
