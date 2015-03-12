@@ -71,6 +71,7 @@ function refreshDisplay() {
       + "<div class=\"ad\">" + dl.area + "</div>"
       + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
+      + " <a class=\"close\">x</a>"
       );
     }
     
@@ -133,7 +134,6 @@ $(document).ready(function() {
 </script>
 
 <script type='text/javascript'>jQuery(document).ready(function($) {
-		$(".dd").append(" <a class=\"close\">X</a>")
 		$(".close").click(function() {
 			$(this).closest(".dd").toggle(500);			
 		});
