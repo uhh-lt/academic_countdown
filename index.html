@@ -37,9 +37,15 @@ var deadlines = new Array();
 // probably not the best idea to make it synchronous, but the quick and dirty hack works for now
 $.ajaxSetup({'async': false});
 $.getJSON(datasource, function(data) {
+  var now = new Date();
   for (var i in data) {
-    data[i].deadline = new Date(data[i].deadline);
-    deadlines.push(data[i])
+    d = new Date(data[i].deadline);
+    while(d < now){
+      d.setFullYear(d.getFullYear()+1); 
+      data[i].approx = 1;
+    }
+    data[i].deadline = d;
+    deadlines.push(data[i]);
   }
   deadlines.sort(function(a,b) { 
     return a.deadline.getTime() - b.deadline.getTime();
@@ -54,7 +60,7 @@ $.getJSON(datasource, function(data) {
 // Display function, called every second or so
 function refreshDisplay() {
     
-    var dc= new Date();
+    var dc = new Date();
     $("#currtime").text("Current time: " + dc);
 
     // calculate and display deadlines
