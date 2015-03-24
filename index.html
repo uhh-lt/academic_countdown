@@ -67,13 +67,17 @@ function refreshDisplay() {
     for(var i=0;i<deadlines.length;i++) {
       var dl = deadlines[i];
       var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
-      
+
+      var venue = dl.venue;
+      if("link" in dl)
+        venue = "<span class=\"vld\" id=\"link"+i+"\">" + venue + "</span>";
+
       warningString= "";
       if("approx" in dl) { warningString= "based on previous year!"; }
       
       $("#deadline" + i).html(
         "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
-      + "<div class=\"vd\">" + dl.venue + "</div>"
+      + "<div class=\"vd\">" + venue + "</div>"
       + "<div class=\"ad\">" + dl.area + "</div>"
       + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
       + "<div class=\"wd\">" + warningString + "</div>"
@@ -87,15 +91,35 @@ function refreshDisplay() {
           return false;
         }
       }(did));
+
+      var linkid = "#link"+i;
+      $(linkid).click(function(x) {
+        return function() {
+          window.open(x);
+          return false;
+        }
+      }(dl.link));
     }
     
     if(backi !== -1) {
-      var dl= deadlines[backi];
+      var dl = deadlines[backi];
+      var venue = dl.venue;
+      if("link" in dl)
+        venue = "<span class=\"vld\" id=\"link"+i+"\">" + venue + "</span>";
       var timeLeft= new Date(dl.deadline.getTime() - dc.getTime());
       $("#backfacetext").html(
-        dl.venue + "</br>"
+        venue + "</br>"
         + timeLeftDescription(timeLeft)
         );
+
+      var linkid = "#link"+i;
+      $(linkid).click(function(x) {
+        return function() {
+          window.open(x);
+          return false;
+        }
+      }(dl.link));
+
     }
     
 }
@@ -112,7 +136,6 @@ $(document).ready(function() {
     
     $(divid).hide();
     $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
-    
     
     $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
       // self-executing function hackery :)
@@ -138,7 +161,7 @@ $(document).ready(function() {
     backi = -1;
     $("#instrown").fadeToggle();
   });
-  
+
   // draw!
   refreshDisplay();
 
@@ -222,6 +245,12 @@ h1{
   font-size: 16px;
 }
 
+/* venue link description span */
+.vld:hover {
+  text-decoration:underline;
+  cursor: pointer;
+}
+
 /* Warning div */
 .wd {
   position: absolute;
@@ -286,7 +315,7 @@ h1{
   <br />
   <div id="bottompart">
  
-  <div id="makeown">Additional Info</div><br />
+  <div id="makeown">Info</div><br />
   <div id="instrown">
    <p>How to make your own countdown: Download this file (index.html) or fork the project from <a href="https://github.com/tudarmstadt-lt/academic_countdown">https://github.com/tudarmstadt-lt/academic_countdown</a> and simply change the datasource, or follow the instructions on <a href="http://www.academiccountdown.com/">www.academiccountdown.com</a>.</p>
    <p>Based on <a href="http://www.academiccountdown.com/">Academic Countdown</a>. Thanks to <a href="https://twitter.com/karpathy">@karpathy</a> for providing the basis framework.</p>
