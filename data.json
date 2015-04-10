@@ -44,7 +44,8 @@
 	{
 		"venue": "SOCC 2015: ACM Symposium on Cloud Computing",
 		"area": "Distributed Systems",
-		"deadline": "24 April 2015, 20:59 PDT"
+		"deadline": "24 April 2015, 20:59 PDT",
+		"link": "https://sites.google.com/site/acm2015socc/"
 	},
 	{
 		"venue": "CONLL",
