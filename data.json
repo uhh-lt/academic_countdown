@@ -1,5 +1,17 @@
 [
 	{
+		"venue": "ACL (long)",
+		"area": "Computational Linguistics",
+		"deadline": "18 March 2016 23:59 UTC+12",
+		"link": "http://acl2016.org/"
+	},
+	{
+		"venue": "ACL (short)",
+		"area": "Computational Linguistics",
+		"deadline": "29 February 2016 23:59 UTC+12",
+		"link": "http://acl2016.org/"
+	},
+	{
 		"venue": "NAACL-HLT (long & short)",
 		"area": "Computational Linguistics",
 		"deadline": "06 January 2016 23:59 UTC-08",
@@ -47,11 +59,6 @@
 		"deadline": "1 May 2015 00:00 GMT+12"	
 	},
 	{
-		"venue": "ACL Student Research Workshop 2015",
-		"area": "Computational Linguistics",
-		"deadline": "31 March 2015 23:39 GMT-8"	
-	},
-	{
 		"venue": "EUROLAN 2015",
 		"area": "CompuDoctoral Consortium - Computational Linguistics",
 		"deadline": "17 May 2015 00:00 GMT+12"	
@@ -60,11 +67,6 @@
 		"venue": "10th Web as Corpus Workshop (WaC-10) @ ​eLex 2015",
 		"area": "Computational Linguistics",
 		"deadline": "24 April 2015 00:00 GMT-12"	
-	},
-	{
-		"venue": "ACL 2015, Demonstrations",
-		"area": "Computational Linguistics",
-		"deadline": "23 March 2015 23:39 PST"	
 	},
 	{
 		"venue": "NLPCS 2015 : Natural Language Processing and Cognitive Science",
@@ -91,11 +93,6 @@
 		"venue": "EMNLP",
 		"area": "Computational Linguistics",
 		"deadline": "May 15, 2015 23:59 UTC-11"
-	},
-	{
-		"venue": "ACL-IJCNLP (short)",
-		"area": "Computational Linguistics",
-		"deadline": "4/30/2015 23:59 PST"
 	},
 	{
 		"venue": "Interspeech 2015",
