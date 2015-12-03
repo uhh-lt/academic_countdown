@@ -34,6 +34,7 @@ var timeLeftDescription = function(x) {
 // load DATABASE
 // Note: data is a list of json objects of this form containing, "venue", "area", "deadline" as parsable string for data (see http://www.w3schools.com/js/js_dates.asp) and optionally "approx" that indicates if the date is just based on a previous date
 var deadlines = new Array();
+var deadlines_approx = new Array();
 // probably not the best idea to make it synchronous, but the quick and dirty hack works for now
 $.ajaxSetup({'async': false});
 $.getJSON(datasource, function(data) {
@@ -45,9 +46,17 @@ $.getJSON(datasource, function(data) {
       data[i].approx = 1;
     }
     data[i].deadline = d;
-    deadlines.push(data[i]);
+    if(data[i].approx){
+      deadlines_approx.push(data[i]);
+    }
+    else{
+      deadlines.push(data[i]);
+    }
   }
   deadlines.sort(function(a,b) { 
+    return a.deadline.getTime() - b.deadline.getTime();
+  });
+  deadlines_approx.sort(function(a,b) { 
     return a.deadline.getTime() - b.deadline.getTime();
   });
 });
@@ -66,62 +75,75 @@ function refreshDisplay() {
     // calculate and display deadlines
     for(var i=0;i<deadlines.length;i++) {
       var dl = deadlines[i];
-      var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
+      refreshDeadline(i, dl, dc, deadlines);
+    }
+    for(var i=0;i<deadlines_approx.length;i++) {
+      var dl = deadlines_approx[i];
+      refreshDeadline(i, dl, dc, deadlines_approx);
+    }
+    
+}
 
-      var venue = dl.venue;
-      if("link" in dl)
-        venue = "<span class=\"vld\" id=\"link"+i+"\">" + venue + "</span>";
+function refreshDeadline(i, dl, dc, deadlines){
 
-      warningString= "";
-      if("approx" in dl) { warningString= "based on previous year!"; }
-      
-      $("#deadline" + i).html(
-        "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
-      + "<div class=\"vd\">" + venue + "</div>"
-      + "<div class=\"ad\">" + dl.area + "</div>"
-      + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
-      + "<div class=\"wd\">" + warningString + "</div>"
-      + "<div class=\"hd\" id=\"hide"+i+"\">hide</div>" 
+    suffix = ""
+    warningString= "";
+    if("approx" in dl) { 
+      warningString= "based on previous year!"; 
+      suffix= "_approx"
+    }
+
+    var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
+
+    var venue = dl.venue;
+    if("link" in dl)
+      venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
+    
+    $("#deadline" + suffix + i).html(
+      "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
+    + "<div class=\"vd\">" + venue + "</div>"
+    + "<div class=\"ad\">" + dl.area + "</div>"
+    + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
+    + "<div class=\"wd\">" + warningString + "</div>"
+    + "<div class=\"hd\" id=\"hide"+suffix+i+"\">hide</div>" 
+    );
+    var hid = "#hide"+suffix+i;
+    var did = "#deadline"+suffix+i;
+    $(hid).click(function(x) {
+      return function() {
+        $(x).hide();
+        return false;
+      }
+    }(did));
+
+    var linkid = "#link"+suffix+i;
+    $(linkid).click(function(x) {
+      return function() {
+        window.open(x);
+        return false;
+      }
+    }(dl.link));
+  }
+  
+  if(backi !== -1) {
+    var dl = deadlines[backi];
+    var venue = dl.venue;
+    if("link" in dl)
+      venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
+    var timeLeft= new Date(dl.deadline.getTime() - dc.getTime());
+    $("#backfacetext").html(
+      venue + "</br>"
+      + timeLeftDescription(timeLeft)
       );
-      var hid = "#hide"+i;
-      var did = "#deadline"+i;
-      $(hid).click(function(x) {
-        return function() {
-          $(x).hide();
-          return false;
-        }
-      }(did));
 
-      var linkid = "#link"+i;
-      $(linkid).click(function(x) {
-        return function() {
-          window.open(x);
-          return false;
-        }
-      }(dl.link));
-    }
-    
-    if(backi !== -1) {
-      var dl = deadlines[backi];
-      var venue = dl.venue;
-      if("link" in dl)
-        venue = "<span class=\"vld\" id=\"link"+i+"\">" + venue + "</span>";
-      var timeLeft= new Date(dl.deadline.getTime() - dc.getTime());
-      $("#backfacetext").html(
-        venue + "</br>"
-        + timeLeftDescription(timeLeft)
-        );
+    var linkid = "#link"+suffix+i;
+    $(linkid).click(function(x) {
+      return function() {
+        window.open(x);
+        return false;
+      }
+    }(dl.link));
 
-      var linkid = "#link"+i;
-      $(linkid).click(function(x) {
-        return function() {
-          window.open(x);
-          return false;
-        }
-      }(dl.link));
-
-    }
-    
 }
 
 // int main(){}
@@ -133,6 +155,23 @@ $(document).ready(function() {
     $("<div class=dd id=deadline" + i + "></div>").appendTo("div#deadlinesdiv");
     var divid= "#deadline" + i;
     var hidid= "#hide" + i;
+    
+    $(divid).hide();
+    $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
+    
+    $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
+      // self-executing function hackery :)
+      return function() {
+        backi = z;
+        $("#backface").fadeIn("slow"); // fade in white stuff
+      }
+    }(i));
+  }
+  for(var i=0;i<deadlines_approx.length;i++) {
+    var dl= deadlines_approx[i];
+    $("<div class=dd id=deadline_approx" + i + "></div>").appendTo("div#deadlinesdiv");
+    var divid= "#deadline_approx" + i;
+    var hidid= "#hide_approx" + i;
     
     $(divid).hide();
     $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
