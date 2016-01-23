@@ -86,44 +86,43 @@ function refreshDisplay() {
 
 function refreshDeadline(i, dl, dc, deadlines){
 
-    suffix = ""
-    warningString= "";
-    if("approx" in dl) { 
-      warningString= "based on previous year!"; 
-      suffix= "_approx"
-    }
-
-    var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
-
-    var venue = dl.venue;
-    if("link" in dl)
-      venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
-    
-    $("#deadline" + suffix + i).html(
-      "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
-    + "<div class=\"vd\">" + venue + "</div>"
-    + "<div class=\"ad\">" + dl.area + "</div>"
-    + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
-    + "<div class=\"wd\">" + warningString + "</div>"
-    + "<div class=\"hd\" id=\"hide"+suffix+i+"\">hide</div>" 
-    );
-    var hid = "#hide"+suffix+i;
-    var did = "#deadline"+suffix+i;
-    $(hid).click(function(x) {
-      return function() {
-        $(x).hide();
-        return false;
-      }
-    }(did));
-
-    var linkid = "#link"+suffix+i;
-    $(linkid).click(function(x) {
-      return function() {
-        window.open(x);
-        return false;
-      }
-    }(dl.link));
+  suffix = ""
+  warningString= "";
+  if("approx" in dl) { 
+    warningString= "based on previous year!"; 
+    suffix= "_approx"
   }
+
+  var timeLeft = new Date(dl.deadline.getTime() - dc.getTime());
+
+  var venue = dl.venue;
+  if("link" in dl)
+    venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
+
+  $("#deadline" + suffix + i).html(
+    "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
+  + "<div class=\"vd\">" + venue + "</div>"
+  + "<div class=\"ad\">" + dl.area + "</div>"
+  + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
+  + "<div class=\"wd\">" + warningString + "</div>"
+  + "<div class=\"hd\" id=\"hide"+suffix+i+"\">hide</div>" 
+  );
+  var hid = "#hide"+suffix+i;
+  var did = "#deadline"+suffix+i;
+  $(hid).click(function(x) {
+    return function() {
+      $(x).hide();
+      return false;
+    }
+  }(did));
+
+  var linkid = "#link"+suffix+i;
+  $(linkid).click(function(x) {
+    return function() {
+      window.open(x);
+      return false;
+    }
+  }(dl.link));
   
   if(backi !== -1) {
     var dl = deadlines[backi];
@@ -143,7 +142,7 @@ function refreshDeadline(i, dl, dc, deadlines){
         return false;
       }
     }(dl.link));
-
+  }
 }
 
 // int main(){}
