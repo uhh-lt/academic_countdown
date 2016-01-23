@@ -84,7 +84,7 @@ function refreshDisplay() {
     
 }
 
-function refreshDeadline(i, dl, dc, deadlines){
+function refreshDeadline(i, dl, dc, deadlines__){
 
   suffix = ""
   warningString= "";
@@ -126,6 +126,9 @@ function refreshDeadline(i, dl, dc, deadlines){
   
   if(backi !== -1) {
     var dl = deadlines[backi];
+    if(backapprox)
+      dl = deadlines_approx[backi];
+    
     var venue = dl.venue;
     if("link" in dl)
       venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
@@ -158,13 +161,14 @@ $(document).ready(function() {
     $(divid).hide();
     $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
     
-    $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
+    $(divid).click(function(z,zapprox) { // Fade in backface and make a giant timer for this event on click
       // self-executing function hackery :)
       return function() {
         backi = z;
+        backapprox = zapprox;
         $("#backface").fadeIn("slow"); // fade in white stuff
       }
-    }(i));
+    }(i,false));
   }
   for(var i=0;i<deadlines_approx.length;i++) {
     var dl= deadlines_approx[i];
@@ -175,13 +179,14 @@ $(document).ready(function() {
     $(divid).hide();
     $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
     
-    $(divid).click(function(z) { // Fade in backface and make a giant timer for this event on click
+    $(divid).click(function(z,zapprox) { // Fade in backface and make a giant timer for this event on click
       // self-executing function hackery :)
       return function() {
         backi = z;
+        backapprox = zapprox;
         $("#backface").fadeIn("slow"); // fade in white stuff
       }
-    }(i));
+    }(i,true));
   }
  
   // set up deadline timer to redraw
