@@ -44,13 +44,13 @@
 	{
 		"venue": "ACL (long)",
 		"area": "Computational Linguistics",
-		"deadline": "18 March 2016 23:59 UTC+12",
+		"deadline": "18 March 2016 23:59 UTC-7",
 		"link": "http://acl2016.org/"
 	},
 	{
 		"venue": "ACL (short)",
 		"area": "Computational Linguistics",
-		"deadline": "29 February 2016 23:59 UTC+12",
+		"deadline": "29 February 2016 23:59 UTC-7",
 		"link": "http://acl2016.org/"
 	},
 	{
