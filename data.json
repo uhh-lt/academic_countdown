@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "SIGIR",
+		"area": "IR",
+		"deadline": "January 17, 2017",
+		"link": "http://sigir.org/sigir2017"
+	},
+	{
 		"venue": "EMNLP",
 		"area": "CL",
 		"deadline": "June 3, 2016, 23:59 GMT-12",
