@@ -1,5 +1,17 @@
 [
 	{
+		"venue": "EACL 2017 - Short ",
+		"area": "CL",
+		"link": "http://eacl2017.org",
+		"deadline": "December 16, 2016 00:00 GMT-11"
+	},
+	{
+		"venue": "EACL 2017 - Long ",
+		"area": "CL",
+		"link": "http://eacl2017.org",
+		"deadline": "September 30, 2016 00:00 GMT-11"
+	},
+	{
 		"venue": "WSDM - abstracts",
 		"area": "Web",
 		"link": "http://www.wsdm-conference.org/2017/",
