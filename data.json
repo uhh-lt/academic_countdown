@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "WWW - abstracts",
+		"area": "Web",
+		"link": "http://www2017.com.au/call-for-papers/",
+		"deadline": "October 24, 2016 23:59 UTC-10"
+	},
+	{
 		"venue": "AAAI - abstracts",
 		"area": "AI",
 		"link": "http://www.aaai.org/Conferences/AAAI/2017",
