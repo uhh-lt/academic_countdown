@@ -170,6 +170,29 @@ $(document).ready(function() {
       }
     }(i,false));
   }
+  
+  // create a link button for showing and hiding estimates from past years
+  var btn_estimates = "btn-show-hide-estimates";
+  $("div#deadlinesdiv").append("</br><div id='" + btn_estimates + "'>show estimates</div></br>");
+  $("#"+btn_estimates).click(function(){
+  	var btn_estimates_text = $('#'+btn_estimates).text();
+  	var is_hidden = btn_estimates_text.startsWith("show");
+  	if(is_hidden){
+  		$('#'+btn_estimates).text(btn_estimates_text.replace("show", "hide"));
+  	}else{
+  		$('#'+btn_estimates).text(btn_estimates_text.replace("hide", "show"));
+  	}
+	for(var i=0;i<deadlines_approx.length;i++) {
+		var divid= "#deadline_approx" + i;
+		if(is_hidden){
+			$(divid).fadeIn(30*(i+1), function() { }); // create a fast but nice fade in effect
+		}else{
+			$(divid).fadeOut(10*(deadlines_approx.length-i+1)); // create an even faster but still nice fade out effect
+		}
+	}
+  });
+
+
   for(var i=0;i<deadlines_approx.length;i++) {
     var dl= deadlines_approx[i];
     $("<div class=dd id=deadline_approx" + i + "></div>").appendTo("div#deadlinesdiv");
@@ -177,7 +200,6 @@ $(document).ready(function() {
     var hidid= "#hide_approx" + i;
     
     $(divid).hide();
-    $(divid).fadeIn(200*(i+1), function() { }); // create a nice fade in effect
     
     $(divid).click(function(z,zapprox) { // Fade in backface and make a giant timer for this event on click
       // self-executing function hackery :)
@@ -342,6 +364,14 @@ h1{
   border-radius: 5px;
   padding: 5px;
 }
+
+#btn-show-hide-estimates {
+  text-decoration: underline;
+  color: #008;
+  cursor: pointer;
+  
+}
+
 </style>
 
 </head>
