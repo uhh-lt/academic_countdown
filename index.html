@@ -40,6 +40,7 @@ $.ajaxSetup({'async': false});
 $.getJSON(datasource, function(data) {
   var now = new Date();
   for (var i in data) {
+    data[i].deadline_str = data[i].deadline
     d = new Date(data[i].deadline);
     while(d < now){
       d.setFullYear(d.getFullYear()+1); 
@@ -131,11 +132,12 @@ function refreshDeadline(i, dl, dc, deadlines__){
     
     var venue = dl.venue;
     if("link" in dl)
-      venue = "<span class=\"vld\" id=\"link"+suffix+i+"\">" + venue + "</span>";
+      venue = "<span class='vld' id='link"+suffix+i+"'>" + venue + "</span>";
     var timeLeft= new Date(dl.deadline.getTime() - dc.getTime());
     $("#backfacetext").html(
       venue + "</br>"
-      + timeLeftDescription(timeLeft)
+      + timeLeftDescription(timeLeft) + "</br>"
+      + "<div class='tdb'>"+dl.deadline_str + "</br>("+dl.deadline.toUTCString()+")</div>"
       );
 
     var linkid = "#link"+suffix+i;
@@ -302,6 +304,14 @@ h1{
 
 /* Time description div */
 .td {
+}
+
+/* Time description div, backface text */
+.tdb {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 16px;
 }
 
 /* Venue description div */
