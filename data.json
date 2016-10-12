@@ -1,5 +1,17 @@
 [
 	{
+		"venue": "IJCAI",
+		"area": "AI",
+		"link": "http://ijcai-17.org",
+		"deadline": "February 19, 2017 23:59 UTC+11"
+	},
+	{
+		"venue": "IJCNLP",
+		"area": "CL",
+		"link": "http://ijcnlp2017.org",
+		"deadline": "June 30, 2017 23:59 UTC+11"
+	},
+	{
 		"venue": "CIKM - abstracts",
 		"area": "IR",
 		"link": "http://www.cikm2017.org/",
