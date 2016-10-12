@@ -1,6 +1,5 @@
 # Academic Deadlines Countdown
-   
-   http://tudarmstadt-lt.github.io/academic_countdown/
+http://tudarmstadt-lt.github.io/academic_countdown/
 
 ## Enter a new deadline via github.com:
   - click on data.json
