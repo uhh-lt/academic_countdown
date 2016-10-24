@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "ACL",
+		"area": "CL",
+		"link": "http://acl2017.org",
+		"deadline": "February 6, 2017 23:59 PDT"
+	},
+	{
 		"venue": "IJCAI",
 		"area": "AI",
 		"link": "http://ijcai-17.org",
