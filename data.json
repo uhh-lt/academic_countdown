@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "EACL SRW 2017",
+		"area": "CL",
+		"link": "https://sites.google.com/site/eaclsrw2017/",
+		"deadline": "November 27, 2016 23:59 GMT+1"
+	},
+	{
 		"venue": "ACL",
 		"area": "CL",
 		"link": "http://acl2017.org",
