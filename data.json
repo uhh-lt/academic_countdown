@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "EMNLP",
+		"area": "CL",
+		"link": "http://emnlp2017.net/",
+		"deadline": "April 14, 2017 23:59 UTC-7"
+	},
+	{
 		"venue": "EACL SRW 2017",
 		"area": "CL",
 		"link": "https://sites.google.com/site/eaclsrw2017/",
