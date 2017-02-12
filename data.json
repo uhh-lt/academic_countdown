@@ -1,5 +1,17 @@
 [
 	{
+		"venue": "CONLL",
+		"area": "CL",
+		"link": "http://www.conll.org",
+		"deadline": "April 23, 2017 23:59 PST"
+	},
+	{
+		"venue": "RANLP",
+		"area": "NLP",
+		"link": "http://lml.bas.bg/ranlp2017/dates.htm",
+		"deadline": "April 28, 2017 23:59 GMT+1"
+	},
+	{
 		"venue": "EMNLP",
 		"area": "CL",
 		"link": "http://emnlp2017.net/",
