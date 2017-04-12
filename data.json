@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "*SEM",
+		"area": "CL",
+		"link": "http://www.conll.org",
+		"deadline": "April 17, 2017 23:59 UTC-11"
+	},
+	{
 		"venue": "CONLL",
 		"area": "CL",
 		"link": "http://www.conll.org",
