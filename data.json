@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "LREC",
+		"area": "CL",
+		"link": "http://lrec2018.lrec-conf.org",
+		"deadline": "September 25, 2017 23:59 UTC"
+	},
+	{
 		"venue": "*SEM",
 		"area": "CL",
 		"link": "http://www.conll.org",
