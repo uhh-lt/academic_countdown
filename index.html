@@ -104,7 +104,7 @@ function refreshDeadline(i, dl, dc, deadlines__){
     "<div class=\"tld\">" + timeLeftDescription(timeLeft) + "</div>"
   + "<div class=\"vd\">" + venue + "</div>"
   + "<div class=\"ad\">" + dl.area + "</div>"
-  + "<div class=\"td\"> Deadline: " + dl.deadline.toUTCString() + "</div>"
+  + "<div class=\"td\"> Deadline: " + dl.deadline.toString() + "</div>"
   + "<div class=\"wd\">" + warningString + "</div>"
   + "<div class=\"hd\" id=\"hide"+suffix+i+"\">hide</div>" 
   );
@@ -137,7 +137,7 @@ function refreshDeadline(i, dl, dc, deadlines__){
     $("#backfacetext").html(
       venue + "</br>"
       + timeLeftDescription(timeLeft) + "</br>"
-      + "<div class='tdb'>"+dl.deadline_str + "</br>("+dl.deadline.toUTCString()+")</div>"
+      + "<div class='tdb'>"+dl.deadline_str + "</br>("+dl.deadline.toString()+")</div>"
       );
 
     var linkid = "#link"+suffix+i;
