@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "SwissText 2018",
+		"area": "CL",
+		"link": "http://www.swisstext.org/",
+		"deadline": "March 02, 2018 23:59 UTC"
+	},
+	{
 		"venue": "LREC",
 		"area": "CL",
 		"link": "http://lrec2018.lrec-conf.org",
