@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "IJCAI",
+		"area": "AI",
+		"link": "http://www.ijcai19.org/",
+		"deadline": " February 19, 2019, 23:59 UTC-12"
+	},
+	{
 		"venue": "SIGIR",
 		"area": "IR",
 		"link": "http://sigir.org/sigir2019/calls/long/",
