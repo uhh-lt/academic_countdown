@@ -1,5 +1,12 @@
 [
 	{
+		"venue": "ACL",
+		"area": "CL",
+		"link": "http://www.acl2019.org/EN/call-for-papers.xhtml",
+		"deadline": "March 4, 2019, 23:59 UTC-12"
+	},
+
+	{
 		"venue": "NAACL (demo)",
 		"area": "CL",
 		"link": "https://naacl2019.org/calls/demos/",
