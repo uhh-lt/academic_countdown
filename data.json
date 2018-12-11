@@ -1,4 +1,11 @@
 [
+
+	{
+		"venue": "KDD",
+		"area": "ML",
+		"link": "https://www.kdd.org/kdd2019",
+		"deadline": "February 3, 2019, 23:59 UTC-12"
+	},
 	{
 		"venue": "ACL",
 		"area": "CL",
