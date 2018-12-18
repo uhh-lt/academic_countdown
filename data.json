@@ -1,5 +1,10 @@
 [
 	{
+		"venue": "CLARIN",
+		"area": "CL",
+		"deadline": "January 30, 2019, 23:59 UTC+2"
+	},	
+	{
 		"venue": "LRE",
 		"area": "CL",
 		"link": "https://www.springer.com/education+&+language/linguistics/journal/10579",
