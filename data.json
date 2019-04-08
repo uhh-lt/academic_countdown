@@ -1,5 +1,11 @@
 [
 	{
+		"venue": "CONLL",
+		"area": "CL",
+		"link": "http://www.conll.org/cfp-2019",
+		"deadline": "May 31, 2019, 23:59 UTC-12"
+	},
+	{
 		"venue": "*SEM",
 		"area": "CL",
 		"link": "https://starsem.org/2019/",
